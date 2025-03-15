@@ -2,7 +2,7 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v6.30.1
-// source: api.proto
+// source: internal/api.proto
 
 package stream_mount_api
 
@@ -22,13 +22,16 @@ const (
 	FileSystemService_Root_FullMethodName         = "/stream_mount_api.FileSystemService/Root"
 	FileSystemService_ReadDirAll_FullMethodName   = "/stream_mount_api.FileSystemService/ReadDirAll"
 	FileSystemService_Lookup_FullMethodName       = "/stream_mount_api.FileSystemService/Lookup"
-	FileSystemService_Remove_FullMethodName       = "/stream_mount_api.FileSystemService/Remove"
-	FileSystemService_Rename_FullMethodName       = "/stream_mount_api.FileSystemService/Rename"
 	FileSystemService_Create_FullMethodName       = "/stream_mount_api.FileSystemService/Create"
 	FileSystemService_Mkdir_FullMethodName        = "/stream_mount_api.FileSystemService/Mkdir"
+	FileSystemService_Remove_FullMethodName       = "/stream_mount_api.FileSystemService/Remove"
+	FileSystemService_Rename_FullMethodName       = "/stream_mount_api.FileSystemService/Rename"
 	FileSystemService_Link_FullMethodName         = "/stream_mount_api.FileSystemService/Link"
-	FileSystemService_GetVideoSize_FullMethodName = "/stream_mount_api.FileSystemService/GetVideoSize"
-	FileSystemService_GetVideoUrl_FullMethodName  = "/stream_mount_api.FileSystemService/GetVideoUrl"
+	FileSystemService_ReadLink_FullMethodName     = "/stream_mount_api.FileSystemService/ReadLink"
+	FileSystemService_ReadFile_FullMethodName     = "/stream_mount_api.FileSystemService/ReadFile"
+	FileSystemService_WriteFile_FullMethodName    = "/stream_mount_api.FileSystemService/WriteFile"
+	FileSystemService_GetFileInfo_FullMethodName  = "/stream_mount_api.FileSystemService/GetFileInfo"
+	FileSystemService_GetStreamUrl_FullMethodName = "/stream_mount_api.FileSystemService/GetStreamUrl"
 )
 
 // FileSystemServiceClient is the client API for FileSystemService service.
@@ -38,13 +41,16 @@ type FileSystemServiceClient interface {
 	Root(ctx context.Context, in *RootRequest, opts ...grpc.CallOption) (*RootResponse, error)
 	ReadDirAll(ctx context.Context, in *ReadDirAllRequest, opts ...grpc.CallOption) (*ReadDirAllResponse, error)
 	Lookup(ctx context.Context, in *LookupRequest, opts ...grpc.CallOption) (*LookupResponse, error)
-	Remove(ctx context.Context, in *RemoveRequest, opts ...grpc.CallOption) (*RemoveResponse, error)
-	Rename(ctx context.Context, in *RenameRequest, opts ...grpc.CallOption) (*RenameResponse, error)
 	Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error)
 	Mkdir(ctx context.Context, in *MkdirRequest, opts ...grpc.CallOption) (*MkdirResponse, error)
+	Remove(ctx context.Context, in *RemoveRequest, opts ...grpc.CallOption) (*RemoveResponse, error)
+	Rename(ctx context.Context, in *RenameRequest, opts ...grpc.CallOption) (*RenameResponse, error)
 	Link(ctx context.Context, in *LinkRequest, opts ...grpc.CallOption) (*LinkResponse, error)
-	GetVideoSize(ctx context.Context, in *GetVideoSizeRequest, opts ...grpc.CallOption) (*GetVideoSizeResponse, error)
-	GetVideoUrl(ctx context.Context, in *GetVideoUrlRequest, opts ...grpc.CallOption) (*GetVideoUrlResponse, error)
+	ReadLink(ctx context.Context, in *ReadLinkRequest, opts ...grpc.CallOption) (*ReadLinkResponse, error)
+	ReadFile(ctx context.Context, in *ReadFileRequest, opts ...grpc.CallOption) (*ReadFileResponse, error)
+	WriteFile(ctx context.Context, in *WriteFileRequest, opts ...grpc.CallOption) (*WriteFileResponse, error)
+	GetFileInfo(ctx context.Context, in *GetFileInfoRequest, opts ...grpc.CallOption) (*GetFileInfoResponse, error)
+	GetStreamUrl(ctx context.Context, in *GetStreamUrlRequest, opts ...grpc.CallOption) (*GetStreamUrlResponse, error)
 }
 
 type fileSystemServiceClient struct {
@@ -85,26 +91,6 @@ func (c *fileSystemServiceClient) Lookup(ctx context.Context, in *LookupRequest,
 	return out, nil
 }
 
-func (c *fileSystemServiceClient) Remove(ctx context.Context, in *RemoveRequest, opts ...grpc.CallOption) (*RemoveResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RemoveResponse)
-	err := c.cc.Invoke(ctx, FileSystemService_Remove_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *fileSystemServiceClient) Rename(ctx context.Context, in *RenameRequest, opts ...grpc.CallOption) (*RenameResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RenameResponse)
-	err := c.cc.Invoke(ctx, FileSystemService_Rename_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *fileSystemServiceClient) Create(ctx context.Context, in *CreateRequest, opts ...grpc.CallOption) (*CreateResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateResponse)
@@ -125,6 +111,26 @@ func (c *fileSystemServiceClient) Mkdir(ctx context.Context, in *MkdirRequest, o
 	return out, nil
 }
 
+func (c *fileSystemServiceClient) Remove(ctx context.Context, in *RemoveRequest, opts ...grpc.CallOption) (*RemoveResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RemoveResponse)
+	err := c.cc.Invoke(ctx, FileSystemService_Remove_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fileSystemServiceClient) Rename(ctx context.Context, in *RenameRequest, opts ...grpc.CallOption) (*RenameResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RenameResponse)
+	err := c.cc.Invoke(ctx, FileSystemService_Rename_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *fileSystemServiceClient) Link(ctx context.Context, in *LinkRequest, opts ...grpc.CallOption) (*LinkResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(LinkResponse)
@@ -135,20 +141,50 @@ func (c *fileSystemServiceClient) Link(ctx context.Context, in *LinkRequest, opt
 	return out, nil
 }
 
-func (c *fileSystemServiceClient) GetVideoSize(ctx context.Context, in *GetVideoSizeRequest, opts ...grpc.CallOption) (*GetVideoSizeResponse, error) {
+func (c *fileSystemServiceClient) ReadLink(ctx context.Context, in *ReadLinkRequest, opts ...grpc.CallOption) (*ReadLinkResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetVideoSizeResponse)
-	err := c.cc.Invoke(ctx, FileSystemService_GetVideoSize_FullMethodName, in, out, cOpts...)
+	out := new(ReadLinkResponse)
+	err := c.cc.Invoke(ctx, FileSystemService_ReadLink_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *fileSystemServiceClient) GetVideoUrl(ctx context.Context, in *GetVideoUrlRequest, opts ...grpc.CallOption) (*GetVideoUrlResponse, error) {
+func (c *fileSystemServiceClient) ReadFile(ctx context.Context, in *ReadFileRequest, opts ...grpc.CallOption) (*ReadFileResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetVideoUrlResponse)
-	err := c.cc.Invoke(ctx, FileSystemService_GetVideoUrl_FullMethodName, in, out, cOpts...)
+	out := new(ReadFileResponse)
+	err := c.cc.Invoke(ctx, FileSystemService_ReadFile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fileSystemServiceClient) WriteFile(ctx context.Context, in *WriteFileRequest, opts ...grpc.CallOption) (*WriteFileResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(WriteFileResponse)
+	err := c.cc.Invoke(ctx, FileSystemService_WriteFile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fileSystemServiceClient) GetFileInfo(ctx context.Context, in *GetFileInfoRequest, opts ...grpc.CallOption) (*GetFileInfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetFileInfoResponse)
+	err := c.cc.Invoke(ctx, FileSystemService_GetFileInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fileSystemServiceClient) GetStreamUrl(ctx context.Context, in *GetStreamUrlRequest, opts ...grpc.CallOption) (*GetStreamUrlResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetStreamUrlResponse)
+	err := c.cc.Invoke(ctx, FileSystemService_GetStreamUrl_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -162,13 +198,16 @@ type FileSystemServiceServer interface {
 	Root(context.Context, *RootRequest) (*RootResponse, error)
 	ReadDirAll(context.Context, *ReadDirAllRequest) (*ReadDirAllResponse, error)
 	Lookup(context.Context, *LookupRequest) (*LookupResponse, error)
-	Remove(context.Context, *RemoveRequest) (*RemoveResponse, error)
-	Rename(context.Context, *RenameRequest) (*RenameResponse, error)
 	Create(context.Context, *CreateRequest) (*CreateResponse, error)
 	Mkdir(context.Context, *MkdirRequest) (*MkdirResponse, error)
+	Remove(context.Context, *RemoveRequest) (*RemoveResponse, error)
+	Rename(context.Context, *RenameRequest) (*RenameResponse, error)
 	Link(context.Context, *LinkRequest) (*LinkResponse, error)
-	GetVideoSize(context.Context, *GetVideoSizeRequest) (*GetVideoSizeResponse, error)
-	GetVideoUrl(context.Context, *GetVideoUrlRequest) (*GetVideoUrlResponse, error)
+	ReadLink(context.Context, *ReadLinkRequest) (*ReadLinkResponse, error)
+	ReadFile(context.Context, *ReadFileRequest) (*ReadFileResponse, error)
+	WriteFile(context.Context, *WriteFileRequest) (*WriteFileResponse, error)
+	GetFileInfo(context.Context, *GetFileInfoRequest) (*GetFileInfoResponse, error)
+	GetStreamUrl(context.Context, *GetStreamUrlRequest) (*GetStreamUrlResponse, error)
 	mustEmbedUnimplementedFileSystemServiceServer()
 }
 
@@ -188,26 +227,35 @@ func (UnimplementedFileSystemServiceServer) ReadDirAll(context.Context, *ReadDir
 func (UnimplementedFileSystemServiceServer) Lookup(context.Context, *LookupRequest) (*LookupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Lookup not implemented")
 }
-func (UnimplementedFileSystemServiceServer) Remove(context.Context, *RemoveRequest) (*RemoveResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Remove not implemented")
-}
-func (UnimplementedFileSystemServiceServer) Rename(context.Context, *RenameRequest) (*RenameResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Rename not implemented")
-}
 func (UnimplementedFileSystemServiceServer) Create(context.Context, *CreateRequest) (*CreateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
 func (UnimplementedFileSystemServiceServer) Mkdir(context.Context, *MkdirRequest) (*MkdirResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Mkdir not implemented")
 }
+func (UnimplementedFileSystemServiceServer) Remove(context.Context, *RemoveRequest) (*RemoveResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Remove not implemented")
+}
+func (UnimplementedFileSystemServiceServer) Rename(context.Context, *RenameRequest) (*RenameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Rename not implemented")
+}
 func (UnimplementedFileSystemServiceServer) Link(context.Context, *LinkRequest) (*LinkResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Link not implemented")
 }
-func (UnimplementedFileSystemServiceServer) GetVideoSize(context.Context, *GetVideoSizeRequest) (*GetVideoSizeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetVideoSize not implemented")
+func (UnimplementedFileSystemServiceServer) ReadLink(context.Context, *ReadLinkRequest) (*ReadLinkResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadLink not implemented")
 }
-func (UnimplementedFileSystemServiceServer) GetVideoUrl(context.Context, *GetVideoUrlRequest) (*GetVideoUrlResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetVideoUrl not implemented")
+func (UnimplementedFileSystemServiceServer) ReadFile(context.Context, *ReadFileRequest) (*ReadFileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReadFile not implemented")
+}
+func (UnimplementedFileSystemServiceServer) WriteFile(context.Context, *WriteFileRequest) (*WriteFileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method WriteFile not implemented")
+}
+func (UnimplementedFileSystemServiceServer) GetFileInfo(context.Context, *GetFileInfoRequest) (*GetFileInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFileInfo not implemented")
+}
+func (UnimplementedFileSystemServiceServer) GetStreamUrl(context.Context, *GetStreamUrlRequest) (*GetStreamUrlResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetStreamUrl not implemented")
 }
 func (UnimplementedFileSystemServiceServer) mustEmbedUnimplementedFileSystemServiceServer() {}
 func (UnimplementedFileSystemServiceServer) testEmbeddedByValue()                           {}
@@ -284,42 +332,6 @@ func _FileSystemService_Lookup_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FileSystemService_Remove_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RemoveRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FileSystemServiceServer).Remove(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: FileSystemService_Remove_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FileSystemServiceServer).Remove(ctx, req.(*RemoveRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _FileSystemService_Rename_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RenameRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FileSystemServiceServer).Rename(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: FileSystemService_Rename_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FileSystemServiceServer).Rename(ctx, req.(*RenameRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _FileSystemService_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateRequest)
 	if err := dec(in); err != nil {
@@ -356,6 +368,42 @@ func _FileSystemService_Mkdir_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FileSystemService_Remove_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileSystemServiceServer).Remove(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FileSystemService_Remove_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileSystemServiceServer).Remove(ctx, req.(*RemoveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FileSystemService_Rename_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RenameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileSystemServiceServer).Rename(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FileSystemService_Rename_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileSystemServiceServer).Rename(ctx, req.(*RenameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _FileSystemService_Link_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(LinkRequest)
 	if err := dec(in); err != nil {
@@ -374,38 +422,92 @@ func _FileSystemService_Link_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FileSystemService_GetVideoSize_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetVideoSizeRequest)
+func _FileSystemService_ReadLink_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReadLinkRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FileSystemServiceServer).GetVideoSize(ctx, in)
+		return srv.(FileSystemServiceServer).ReadLink(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: FileSystemService_GetVideoSize_FullMethodName,
+		FullMethod: FileSystemService_ReadLink_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FileSystemServiceServer).GetVideoSize(ctx, req.(*GetVideoSizeRequest))
+		return srv.(FileSystemServiceServer).ReadLink(ctx, req.(*ReadLinkRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _FileSystemService_GetVideoUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetVideoUrlRequest)
+func _FileSystemService_ReadFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReadFileRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FileSystemServiceServer).GetVideoUrl(ctx, in)
+		return srv.(FileSystemServiceServer).ReadFile(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: FileSystemService_GetVideoUrl_FullMethodName,
+		FullMethod: FileSystemService_ReadFile_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FileSystemServiceServer).GetVideoUrl(ctx, req.(*GetVideoUrlRequest))
+		return srv.(FileSystemServiceServer).ReadFile(ctx, req.(*ReadFileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FileSystemService_WriteFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WriteFileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileSystemServiceServer).WriteFile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FileSystemService_WriteFile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileSystemServiceServer).WriteFile(ctx, req.(*WriteFileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FileSystemService_GetFileInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFileInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileSystemServiceServer).GetFileInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FileSystemService_GetFileInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileSystemServiceServer).GetFileInfo(ctx, req.(*GetFileInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FileSystemService_GetStreamUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetStreamUrlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileSystemServiceServer).GetStreamUrl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FileSystemService_GetStreamUrl_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileSystemServiceServer).GetStreamUrl(ctx, req.(*GetStreamUrlRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -430,14 +532,6 @@ var FileSystemService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _FileSystemService_Lookup_Handler,
 		},
 		{
-			MethodName: "Remove",
-			Handler:    _FileSystemService_Remove_Handler,
-		},
-		{
-			MethodName: "Rename",
-			Handler:    _FileSystemService_Rename_Handler,
-		},
-		{
 			MethodName: "Create",
 			Handler:    _FileSystemService_Create_Handler,
 		},
@@ -446,18 +540,38 @@ var FileSystemService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _FileSystemService_Mkdir_Handler,
 		},
 		{
+			MethodName: "Remove",
+			Handler:    _FileSystemService_Remove_Handler,
+		},
+		{
+			MethodName: "Rename",
+			Handler:    _FileSystemService_Rename_Handler,
+		},
+		{
 			MethodName: "Link",
 			Handler:    _FileSystemService_Link_Handler,
 		},
 		{
-			MethodName: "GetVideoSize",
-			Handler:    _FileSystemService_GetVideoSize_Handler,
+			MethodName: "ReadLink",
+			Handler:    _FileSystemService_ReadLink_Handler,
 		},
 		{
-			MethodName: "GetVideoUrl",
-			Handler:    _FileSystemService_GetVideoUrl_Handler,
+			MethodName: "ReadFile",
+			Handler:    _FileSystemService_ReadFile_Handler,
+		},
+		{
+			MethodName: "WriteFile",
+			Handler:    _FileSystemService_WriteFile_Handler,
+		},
+		{
+			MethodName: "GetFileInfo",
+			Handler:    _FileSystemService_GetFileInfo_Handler,
+		},
+		{
+			MethodName: "GetStreamUrl",
+			Handler:    _FileSystemService_GetStreamUrl_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "api.proto",
+	Metadata: "internal/api.proto",
 }

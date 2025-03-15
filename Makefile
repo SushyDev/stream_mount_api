@@ -1,7 +1,7 @@
 # Makefile for building a Go gRPC project
 
 # Directories
-PROTO_DIR := .
+PROTO_DIR := internal
 
 # Find all proto files in the proto directory
 PROTO_FILES := $(wildcard $(PROTO_DIR)/*.proto)
