@@ -32,7 +32,7 @@ This repository contains:
 └── .gitignore             # Git ignore patterns
 ```
 
-**For Go users**: Import `github.com/sushydev/stream_mount_api/gen/go`  
+**For Go users**: Import `sushydev.github.io/stream_mount_api/go/api`  
 **For Elixir users**: Add as dependency pointing to `gen/elixir` subdirectory
 
 ## Quick Start
@@ -66,16 +66,16 @@ This auto-generates code when you commit proto file changes.
 ## Using as a Go Package
 
 ```go
-import pb "github.com/sushydev/stream_mount_api/gen/go"
+import api "sushydev.github.io/stream_mount_api/go/api"
 
 // Use the client
-client := pb.NewFileSystemServiceClient(conn)
-resp, _ := client.Root(context.Background(), &pb.RootRequest{})
+client := api.NewFileSystemServiceClient(conn)
+resp, _ := client.Root(context.Background(), &api.RootRequest{})
 ```
 
 Get the package:
 ```bash
-got get github.com/sushydev/stream_mount_api/gen/go
+go get sushydev.github.io/stream_mount_api/go
 ```
 
 ## Using as an Elixir Package

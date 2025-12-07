@@ -26,13 +26,13 @@ make generate
 ### Go
 
 ```bash
-go get github.com/sushydev/stream_mount_api
+go get sushydev.github.io/stream_mount_api/go
 ```
 
 ```go
-import pb "github.com/sushydev/stream_mount_api/gen/go/stream_mount_api"
+import api "sushydev.github.io/stream_mount_api/go/api"
 
-client := pb.NewFileSystemServiceClient(conn)
+client := api.NewFileSystemServiceClient(conn)
 ```
 
 ### Elixir
