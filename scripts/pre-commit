@@ -13,7 +13,7 @@ readonly NC='\033[0m' # No Color
 echo -e "${YELLOW}Pre-commit: Checking for proto file changes...${NC}"
 
 # Check if any proto files are being committed
-readonly PROTO_CHANGED=$(git diff --cached --name-only | grep -E '\.proto$' || true)
+readonly PROTO_CHANGED=$(git diff --staged --name-only | grep -E '\.proto$' || true)
 
 if [ -z "$PROTO_CHANGED" ]; then
     echo -e "${GREEN}No proto files changed, skipping generation${NC}"
