@@ -1,4 +1,4 @@
-module github.com/sushydev/stream_mount_api/gen/go
+module sushydev.github.io/stream_mount_api/go
 
 go 1.25.4
 

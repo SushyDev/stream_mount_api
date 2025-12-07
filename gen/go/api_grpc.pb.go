@@ -4,7 +4,7 @@
 // - protoc             v6.32.1
 // source: api.proto
 
-package stream_mount_api
+package _go
 
 import (
 	context "context"

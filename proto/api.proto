@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package stream_mount_api;
 
-option go_package = "github.com/sushydev/stream_mount_api/gen/go/stream_mount_api";
+option go_package = "sushydev.github.io/stream_mount_api/go";
 
 service FileSystemService {
 	rpc Root(RootRequest) returns (RootResponse);

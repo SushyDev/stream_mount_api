@@ -4,7 +4,7 @@
 // 	protoc        v6.32.1
 // source: api.proto
 
-package stream_mount_api
+package _go
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -1691,7 +1691,7 @@ const file_api_proto_rawDesc = "" +
 	"\bReadFile\x12!.stream_mount_api.ReadFileRequest\x1a\".stream_mount_api.ReadFileResponse\x12T\n" +
 	"\tWriteFile\x12\".stream_mount_api.WriteFileRequest\x1a#.stream_mount_api.WriteFileResponse\x12Z\n" +
 	"\vGetFileInfo\x12$.stream_mount_api.GetFileInfoRequest\x1a%.stream_mount_api.GetFileInfoResponse\x12]\n" +
-	"\fGetStreamUrl\x12%.stream_mount_api.GetStreamUrlRequest\x1a&.stream_mount_api.GetStreamUrlResponseB>Z<github.com/sushydev/stream_mount_api/gen/go/stream_mount_apib\x06proto3"
+	"\fGetStreamUrl\x12%.stream_mount_api.GetStreamUrlRequest\x1a&.stream_mount_api.GetStreamUrlResponseB(Z&sushydev.github.io/stream_mount_api/gob\x06proto3"
 
 var (
 	file_api_proto_rawDescOnce sync.Once
