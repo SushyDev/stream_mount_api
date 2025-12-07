@@ -59,6 +59,8 @@ defmodule StreamMountApi.CreateResponse do
   @moduledoc false
 
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
+
+  field :node, 1, type: StreamMountApi.Node
 end
 
 defmodule StreamMountApi.MkdirRequest do
@@ -130,6 +132,30 @@ defmodule StreamMountApi.LinkResponse do
   field :node, 1, type: StreamMountApi.Node
 end
 
+defmodule StreamMountApi.SetattrRequest do
+  @moduledoc false
+
+  use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
+
+  field :node_id, 1, type: :uint64, json_name: "nodeId"
+  field :mode, 2, proto3_optional: true, type: :uint32
+  field :size, 3, proto3_optional: true, type: :uint64
+  field :atime, 4, proto3_optional: true, type: :uint64
+  field :atime_nsec, 5, proto3_optional: true, type: :uint32, json_name: "atimeNsec"
+  field :mtime, 6, proto3_optional: true, type: :uint64
+  field :mtime_nsec, 7, proto3_optional: true, type: :uint32, json_name: "mtimeNsec"
+  field :uid, 8, proto3_optional: true, type: :uint32
+  field :gid, 9, proto3_optional: true, type: :uint32
+end
+
+defmodule StreamMountApi.SetattrResponse do
+  @moduledoc false
+
+  use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
+
+  field :node, 1, type: StreamMountApi.Node
+end
+
 defmodule StreamMountApi.GetFileInfoRequest do
   @moduledoc false
 
@@ -143,8 +169,17 @@ defmodule StreamMountApi.GetFileInfoResponse do
 
   use Protobuf, protoc_gen_elixir_version: "0.15.0", syntax: :proto3
 
-  field :size, 1, proto3_optional: true, type: :uint64
-  field :mode, 2, proto3_optional: true, type: :uint32
+  field :size, 1, type: :uint64
+  field :mode, 2, type: :uint32
+  field :atime, 3, type: :uint64
+  field :atime_nsec, 4, type: :uint32, json_name: "atimeNsec"
+  field :mtime, 5, type: :uint64
+  field :mtime_nsec, 6, type: :uint32, json_name: "mtimeNsec"
+  field :ctime, 7, type: :uint64
+  field :ctime_nsec, 8, type: :uint32, json_name: "ctimeNsec"
+  field :uid, 9, type: :uint32
+  field :gid, 10, type: :uint32
+  field :nlink, 11, type: :uint32
 end
 
 defmodule StreamMountApi.GetStreamUrlRequest do
@@ -208,6 +243,16 @@ defmodule StreamMountApi.Node do
   field :name, 2, type: :string
   field :mode, 3, type: :uint32
   field :streamable, 4, type: :bool
+  field :size, 5, type: :uint64
+  field :atime, 6, type: :uint64
+  field :atime_nsec, 7, type: :uint32, json_name: "atimeNsec"
+  field :mtime, 8, type: :uint64
+  field :mtime_nsec, 9, type: :uint32, json_name: "mtimeNsec"
+  field :ctime, 10, type: :uint64
+  field :ctime_nsec, 11, type: :uint32, json_name: "ctimeNsec"
+  field :uid, 12, type: :uint32
+  field :gid, 13, type: :uint32
+  field :nlink, 14, type: :uint32
 end
 
 defmodule StreamMountApi.FileSystemService.Service do
@@ -232,6 +277,8 @@ defmodule StreamMountApi.FileSystemService.Service do
   rpc :Rename, StreamMountApi.RenameRequest, StreamMountApi.RenameResponse
 
   rpc :Link, StreamMountApi.LinkRequest, StreamMountApi.LinkResponse
+
+  rpc :Setattr, StreamMountApi.SetattrRequest, StreamMountApi.SetattrResponse
 
   rpc :ReadFile, StreamMountApi.ReadFileRequest, StreamMountApi.ReadFileResponse
 

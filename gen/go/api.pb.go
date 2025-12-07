@@ -347,6 +347,7 @@ func (x *CreateRequest) GetMode() uint32 {
 
 type CreateResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
+	Node          *Node                  `protobuf:"bytes,1,opt,name=node,proto3" json:"node,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -379,6 +380,13 @@ func (x *CreateResponse) ProtoReflect() protoreflect.Message {
 // Deprecated: Use CreateResponse.ProtoReflect.Descriptor instead.
 func (*CreateResponse) Descriptor() ([]byte, []int) {
 	return file_api_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *CreateResponse) GetNode() *Node {
+	if x != nil {
+		return x.Node
+	}
+	return nil
 }
 
 type MkdirRequest struct {
@@ -781,6 +789,158 @@ func (x *LinkResponse) GetNode() *Node {
 	return nil
 }
 
+type SetattrRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	NodeId        uint64                 `protobuf:"varint,1,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
+	Mode          *uint32                `protobuf:"varint,2,opt,name=mode,proto3,oneof" json:"mode,omitempty"`
+	Size          *uint64                `protobuf:"varint,3,opt,name=size,proto3,oneof" json:"size,omitempty"`
+	Atime         *uint64                `protobuf:"varint,4,opt,name=atime,proto3,oneof" json:"atime,omitempty"`                          // seconds since epoch
+	AtimeNsec     *uint32                `protobuf:"varint,5,opt,name=atime_nsec,json=atimeNsec,proto3,oneof" json:"atime_nsec,omitempty"` // nanoseconds
+	Mtime         *uint64                `protobuf:"varint,6,opt,name=mtime,proto3,oneof" json:"mtime,omitempty"`                          // seconds since epoch
+	MtimeNsec     *uint32                `protobuf:"varint,7,opt,name=mtime_nsec,json=mtimeNsec,proto3,oneof" json:"mtime_nsec,omitempty"` // nanoseconds
+	Uid           *uint32                `protobuf:"varint,8,opt,name=uid,proto3,oneof" json:"uid,omitempty"`
+	Gid           *uint32                `protobuf:"varint,9,opt,name=gid,proto3,oneof" json:"gid,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetattrRequest) Reset() {
+	*x = SetattrRequest{}
+	mi := &file_api_proto_msgTypes[16]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetattrRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetattrRequest) ProtoMessage() {}
+
+func (x *SetattrRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_api_proto_msgTypes[16]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetattrRequest.ProtoReflect.Descriptor instead.
+func (*SetattrRequest) Descriptor() ([]byte, []int) {
+	return file_api_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *SetattrRequest) GetNodeId() uint64 {
+	if x != nil {
+		return x.NodeId
+	}
+	return 0
+}
+
+func (x *SetattrRequest) GetMode() uint32 {
+	if x != nil && x.Mode != nil {
+		return *x.Mode
+	}
+	return 0
+}
+
+func (x *SetattrRequest) GetSize() uint64 {
+	if x != nil && x.Size != nil {
+		return *x.Size
+	}
+	return 0
+}
+
+func (x *SetattrRequest) GetAtime() uint64 {
+	if x != nil && x.Atime != nil {
+		return *x.Atime
+	}
+	return 0
+}
+
+func (x *SetattrRequest) GetAtimeNsec() uint32 {
+	if x != nil && x.AtimeNsec != nil {
+		return *x.AtimeNsec
+	}
+	return 0
+}
+
+func (x *SetattrRequest) GetMtime() uint64 {
+	if x != nil && x.Mtime != nil {
+		return *x.Mtime
+	}
+	return 0
+}
+
+func (x *SetattrRequest) GetMtimeNsec() uint32 {
+	if x != nil && x.MtimeNsec != nil {
+		return *x.MtimeNsec
+	}
+	return 0
+}
+
+func (x *SetattrRequest) GetUid() uint32 {
+	if x != nil && x.Uid != nil {
+		return *x.Uid
+	}
+	return 0
+}
+
+func (x *SetattrRequest) GetGid() uint32 {
+	if x != nil && x.Gid != nil {
+		return *x.Gid
+	}
+	return 0
+}
+
+type SetattrResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Node          *Node                  `protobuf:"bytes,1,opt,name=node,proto3" json:"node,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SetattrResponse) Reset() {
+	*x = SetattrResponse{}
+	mi := &file_api_proto_msgTypes[17]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SetattrResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SetattrResponse) ProtoMessage() {}
+
+func (x *SetattrResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_api_proto_msgTypes[17]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SetattrResponse.ProtoReflect.Descriptor instead.
+func (*SetattrResponse) Descriptor() ([]byte, []int) {
+	return file_api_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *SetattrResponse) GetNode() *Node {
+	if x != nil {
+		return x.Node
+	}
+	return nil
+}
+
 type GetFileInfoRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	NodeId        uint64                 `protobuf:"varint,1,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
@@ -790,7 +950,7 @@ type GetFileInfoRequest struct {
 
 func (x *GetFileInfoRequest) Reset() {
 	*x = GetFileInfoRequest{}
-	mi := &file_api_proto_msgTypes[16]
+	mi := &file_api_proto_msgTypes[18]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -802,7 +962,7 @@ func (x *GetFileInfoRequest) String() string {
 func (*GetFileInfoRequest) ProtoMessage() {}
 
 func (x *GetFileInfoRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[16]
+	mi := &file_api_proto_msgTypes[18]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -815,7 +975,7 @@ func (x *GetFileInfoRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetFileInfoRequest.ProtoReflect.Descriptor instead.
 func (*GetFileInfoRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{16}
+	return file_api_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *GetFileInfoRequest) GetNodeId() uint64 {
@@ -827,15 +987,24 @@ func (x *GetFileInfoRequest) GetNodeId() uint64 {
 
 type GetFileInfoResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	Size          *uint64                `protobuf:"varint,1,opt,name=size,proto3,oneof" json:"size,omitempty"`
-	Mode          *uint32                `protobuf:"varint,2,opt,name=mode,proto3,oneof" json:"mode,omitempty"`
+	Size          uint64                 `protobuf:"varint,1,opt,name=size,proto3" json:"size,omitempty"`
+	Mode          uint32                 `protobuf:"varint,2,opt,name=mode,proto3" json:"mode,omitempty"`
+	Atime         uint64                 `protobuf:"varint,3,opt,name=atime,proto3" json:"atime,omitempty"`                          // seconds since epoch
+	AtimeNsec     uint32                 `protobuf:"varint,4,opt,name=atime_nsec,json=atimeNsec,proto3" json:"atime_nsec,omitempty"` // nanoseconds
+	Mtime         uint64                 `protobuf:"varint,5,opt,name=mtime,proto3" json:"mtime,omitempty"`                          // seconds since epoch
+	MtimeNsec     uint32                 `protobuf:"varint,6,opt,name=mtime_nsec,json=mtimeNsec,proto3" json:"mtime_nsec,omitempty"` // nanoseconds
+	Ctime         uint64                 `protobuf:"varint,7,opt,name=ctime,proto3" json:"ctime,omitempty"`                          // seconds since epoch
+	CtimeNsec     uint32                 `protobuf:"varint,8,opt,name=ctime_nsec,json=ctimeNsec,proto3" json:"ctime_nsec,omitempty"` // nanoseconds
+	Uid           uint32                 `protobuf:"varint,9,opt,name=uid,proto3" json:"uid,omitempty"`
+	Gid           uint32                 `protobuf:"varint,10,opt,name=gid,proto3" json:"gid,omitempty"`
+	Nlink         uint32                 `protobuf:"varint,11,opt,name=nlink,proto3" json:"nlink,omitempty"` // number of hard links
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *GetFileInfoResponse) Reset() {
 	*x = GetFileInfoResponse{}
-	mi := &file_api_proto_msgTypes[17]
+	mi := &file_api_proto_msgTypes[19]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -847,7 +1016,7 @@ func (x *GetFileInfoResponse) String() string {
 func (*GetFileInfoResponse) ProtoMessage() {}
 
 func (x *GetFileInfoResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[17]
+	mi := &file_api_proto_msgTypes[19]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -860,19 +1029,82 @@ func (x *GetFileInfoResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetFileInfoResponse.ProtoReflect.Descriptor instead.
 func (*GetFileInfoResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{17}
+	return file_api_proto_rawDescGZIP(), []int{19}
 }
 
 func (x *GetFileInfoResponse) GetSize() uint64 {
-	if x != nil && x.Size != nil {
-		return *x.Size
+	if x != nil {
+		return x.Size
 	}
 	return 0
 }
 
 func (x *GetFileInfoResponse) GetMode() uint32 {
-	if x != nil && x.Mode != nil {
-		return *x.Mode
+	if x != nil {
+		return x.Mode
+	}
+	return 0
+}
+
+func (x *GetFileInfoResponse) GetAtime() uint64 {
+	if x != nil {
+		return x.Atime
+	}
+	return 0
+}
+
+func (x *GetFileInfoResponse) GetAtimeNsec() uint32 {
+	if x != nil {
+		return x.AtimeNsec
+	}
+	return 0
+}
+
+func (x *GetFileInfoResponse) GetMtime() uint64 {
+	if x != nil {
+		return x.Mtime
+	}
+	return 0
+}
+
+func (x *GetFileInfoResponse) GetMtimeNsec() uint32 {
+	if x != nil {
+		return x.MtimeNsec
+	}
+	return 0
+}
+
+func (x *GetFileInfoResponse) GetCtime() uint64 {
+	if x != nil {
+		return x.Ctime
+	}
+	return 0
+}
+
+func (x *GetFileInfoResponse) GetCtimeNsec() uint32 {
+	if x != nil {
+		return x.CtimeNsec
+	}
+	return 0
+}
+
+func (x *GetFileInfoResponse) GetUid() uint32 {
+	if x != nil {
+		return x.Uid
+	}
+	return 0
+}
+
+func (x *GetFileInfoResponse) GetGid() uint32 {
+	if x != nil {
+		return x.Gid
+	}
+	return 0
+}
+
+func (x *GetFileInfoResponse) GetNlink() uint32 {
+	if x != nil {
+		return x.Nlink
 	}
 	return 0
 }
@@ -886,7 +1118,7 @@ type GetStreamUrlRequest struct {
 
 func (x *GetStreamUrlRequest) Reset() {
 	*x = GetStreamUrlRequest{}
-	mi := &file_api_proto_msgTypes[18]
+	mi := &file_api_proto_msgTypes[20]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -898,7 +1130,7 @@ func (x *GetStreamUrlRequest) String() string {
 func (*GetStreamUrlRequest) ProtoMessage() {}
 
 func (x *GetStreamUrlRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[18]
+	mi := &file_api_proto_msgTypes[20]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -911,7 +1143,7 @@ func (x *GetStreamUrlRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetStreamUrlRequest.ProtoReflect.Descriptor instead.
 func (*GetStreamUrlRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{18}
+	return file_api_proto_rawDescGZIP(), []int{20}
 }
 
 func (x *GetStreamUrlRequest) GetNodeId() uint64 {
@@ -930,7 +1162,7 @@ type GetStreamUrlResponse struct {
 
 func (x *GetStreamUrlResponse) Reset() {
 	*x = GetStreamUrlResponse{}
-	mi := &file_api_proto_msgTypes[19]
+	mi := &file_api_proto_msgTypes[21]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -942,7 +1174,7 @@ func (x *GetStreamUrlResponse) String() string {
 func (*GetStreamUrlResponse) ProtoMessage() {}
 
 func (x *GetStreamUrlResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[19]
+	mi := &file_api_proto_msgTypes[21]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -955,7 +1187,7 @@ func (x *GetStreamUrlResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetStreamUrlResponse.ProtoReflect.Descriptor instead.
 func (*GetStreamUrlResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{19}
+	return file_api_proto_rawDescGZIP(), []int{21}
 }
 
 func (x *GetStreamUrlResponse) GetUrl() string {
@@ -976,7 +1208,7 @@ type ReadFileRequest struct {
 
 func (x *ReadFileRequest) Reset() {
 	*x = ReadFileRequest{}
-	mi := &file_api_proto_msgTypes[20]
+	mi := &file_api_proto_msgTypes[22]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -988,7 +1220,7 @@ func (x *ReadFileRequest) String() string {
 func (*ReadFileRequest) ProtoMessage() {}
 
 func (x *ReadFileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[20]
+	mi := &file_api_proto_msgTypes[22]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1001,7 +1233,7 @@ func (x *ReadFileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadFileRequest.ProtoReflect.Descriptor instead.
 func (*ReadFileRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{20}
+	return file_api_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ReadFileRequest) GetNodeId() uint64 {
@@ -1034,7 +1266,7 @@ type ReadFileResponse struct {
 
 func (x *ReadFileResponse) Reset() {
 	*x = ReadFileResponse{}
-	mi := &file_api_proto_msgTypes[21]
+	mi := &file_api_proto_msgTypes[23]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1046,7 +1278,7 @@ func (x *ReadFileResponse) String() string {
 func (*ReadFileResponse) ProtoMessage() {}
 
 func (x *ReadFileResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[21]
+	mi := &file_api_proto_msgTypes[23]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1059,7 +1291,7 @@ func (x *ReadFileResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadFileResponse.ProtoReflect.Descriptor instead.
 func (*ReadFileResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{21}
+	return file_api_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ReadFileResponse) GetData() []byte {
@@ -1080,7 +1312,7 @@ type WriteFileRequest struct {
 
 func (x *WriteFileRequest) Reset() {
 	*x = WriteFileRequest{}
-	mi := &file_api_proto_msgTypes[22]
+	mi := &file_api_proto_msgTypes[24]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1092,7 +1324,7 @@ func (x *WriteFileRequest) String() string {
 func (*WriteFileRequest) ProtoMessage() {}
 
 func (x *WriteFileRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[22]
+	mi := &file_api_proto_msgTypes[24]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1105,7 +1337,7 @@ func (x *WriteFileRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WriteFileRequest.ProtoReflect.Descriptor instead.
 func (*WriteFileRequest) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{22}
+	return file_api_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *WriteFileRequest) GetNodeId() uint64 {
@@ -1138,7 +1370,7 @@ type WriteFileResponse struct {
 
 func (x *WriteFileResponse) Reset() {
 	*x = WriteFileResponse{}
-	mi := &file_api_proto_msgTypes[23]
+	mi := &file_api_proto_msgTypes[25]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1150,7 +1382,7 @@ func (x *WriteFileResponse) String() string {
 func (*WriteFileResponse) ProtoMessage() {}
 
 func (x *WriteFileResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[23]
+	mi := &file_api_proto_msgTypes[25]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1163,7 +1395,7 @@ func (x *WriteFileResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use WriteFileResponse.ProtoReflect.Descriptor instead.
 func (*WriteFileResponse) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{23}
+	return file_api_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *WriteFileResponse) GetBytesWritten() uint64 {
@@ -1177,15 +1409,25 @@ type Node struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            uint64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name          string                 `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Mode          uint32                 `protobuf:"varint,3,opt,name=mode,proto3" json:"mode,omitempty"`
+	Mode          uint32                 `protobuf:"varint,3,opt,name=mode,proto3" json:"mode,omitempty"` // Unix file mode including type bits (S_IFDIR, S_IFREG, etc.)
 	Streamable    bool                   `protobuf:"varint,4,opt,name=streamable,proto3" json:"streamable,omitempty"`
+	Size          uint64                 `protobuf:"varint,5,opt,name=size,proto3" json:"size,omitempty"`
+	Atime         uint64                 `protobuf:"varint,6,opt,name=atime,proto3" json:"atime,omitempty"`                           // seconds since epoch
+	AtimeNsec     uint32                 `protobuf:"varint,7,opt,name=atime_nsec,json=atimeNsec,proto3" json:"atime_nsec,omitempty"`  // nanoseconds
+	Mtime         uint64                 `protobuf:"varint,8,opt,name=mtime,proto3" json:"mtime,omitempty"`                           // seconds since epoch
+	MtimeNsec     uint32                 `protobuf:"varint,9,opt,name=mtime_nsec,json=mtimeNsec,proto3" json:"mtime_nsec,omitempty"`  // nanoseconds
+	Ctime         uint64                 `protobuf:"varint,10,opt,name=ctime,proto3" json:"ctime,omitempty"`                          // seconds since epoch
+	CtimeNsec     uint32                 `protobuf:"varint,11,opt,name=ctime_nsec,json=ctimeNsec,proto3" json:"ctime_nsec,omitempty"` // nanoseconds
+	Uid           uint32                 `protobuf:"varint,12,opt,name=uid,proto3" json:"uid,omitempty"`
+	Gid           uint32                 `protobuf:"varint,13,opt,name=gid,proto3" json:"gid,omitempty"`
+	Nlink         uint32                 `protobuf:"varint,14,opt,name=nlink,proto3" json:"nlink,omitempty"` // number of hard links
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
 func (x *Node) Reset() {
 	*x = Node{}
-	mi := &file_api_proto_msgTypes[24]
+	mi := &file_api_proto_msgTypes[26]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1197,7 +1439,7 @@ func (x *Node) String() string {
 func (*Node) ProtoMessage() {}
 
 func (x *Node) ProtoReflect() protoreflect.Message {
-	mi := &file_api_proto_msgTypes[24]
+	mi := &file_api_proto_msgTypes[26]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1210,7 +1452,7 @@ func (x *Node) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Node.ProtoReflect.Descriptor instead.
 func (*Node) Descriptor() ([]byte, []int) {
-	return file_api_proto_rawDescGZIP(), []int{24}
+	return file_api_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *Node) GetId() uint64 {
@@ -1241,6 +1483,76 @@ func (x *Node) GetStreamable() bool {
 	return false
 }
 
+func (x *Node) GetSize() uint64 {
+	if x != nil {
+		return x.Size
+	}
+	return 0
+}
+
+func (x *Node) GetAtime() uint64 {
+	if x != nil {
+		return x.Atime
+	}
+	return 0
+}
+
+func (x *Node) GetAtimeNsec() uint32 {
+	if x != nil {
+		return x.AtimeNsec
+	}
+	return 0
+}
+
+func (x *Node) GetMtime() uint64 {
+	if x != nil {
+		return x.Mtime
+	}
+	return 0
+}
+
+func (x *Node) GetMtimeNsec() uint32 {
+	if x != nil {
+		return x.MtimeNsec
+	}
+	return 0
+}
+
+func (x *Node) GetCtime() uint64 {
+	if x != nil {
+		return x.Ctime
+	}
+	return 0
+}
+
+func (x *Node) GetCtimeNsec() uint32 {
+	if x != nil {
+		return x.CtimeNsec
+	}
+	return 0
+}
+
+func (x *Node) GetUid() uint32 {
+	if x != nil {
+		return x.Uid
+	}
+	return 0
+}
+
+func (x *Node) GetGid() uint32 {
+	if x != nil {
+		return x.Gid
+	}
+	return 0
+}
+
+func (x *Node) GetNlink() uint32 {
+	if x != nil {
+		return x.Nlink
+	}
+	return 0
+}
+
 var File_api_proto protoreflect.FileDescriptor
 
 const file_api_proto_rawDesc = "" +
@@ -1262,8 +1574,9 @@ const file_api_proto_rawDesc = "" +
 	"\rCreateRequest\x12$\n" +
 	"\x0eparent_node_id\x18\x01 \x01(\x04R\fparentNodeId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
-	"\x04mode\x18\x03 \x01(\rR\x04mode\"\x10\n" +
-	"\x0eCreateResponse\"H\n" +
+	"\x04mode\x18\x03 \x01(\rR\x04mode\"<\n" +
+	"\x0eCreateResponse\x12*\n" +
+	"\x04node\x18\x01 \x01(\v2\x16.stream_mount_api.NodeR\x04node\"H\n" +
 	"\fMkdirRequest\x12$\n" +
 	"\x0eparent_node_id\x18\x01 \x01(\x04R\fparentNodeId\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\";\n" +
@@ -1285,14 +1598,47 @@ const file_api_proto_rawDesc = "" +
 	"\x0eparent_node_id\x18\x02 \x01(\x04R\fparentNodeId\x12\x12\n" +
 	"\x04name\x18\x03 \x01(\tR\x04name\":\n" +
 	"\fLinkResponse\x12*\n" +
+	"\x04node\x18\x01 \x01(\v2\x16.stream_mount_api.NodeR\x04node\"\xdb\x02\n" +
+	"\x0eSetattrRequest\x12\x17\n" +
+	"\anode_id\x18\x01 \x01(\x04R\x06nodeId\x12\x17\n" +
+	"\x04mode\x18\x02 \x01(\rH\x00R\x04mode\x88\x01\x01\x12\x17\n" +
+	"\x04size\x18\x03 \x01(\x04H\x01R\x04size\x88\x01\x01\x12\x19\n" +
+	"\x05atime\x18\x04 \x01(\x04H\x02R\x05atime\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"atime_nsec\x18\x05 \x01(\rH\x03R\tatimeNsec\x88\x01\x01\x12\x19\n" +
+	"\x05mtime\x18\x06 \x01(\x04H\x04R\x05mtime\x88\x01\x01\x12\"\n" +
+	"\n" +
+	"mtime_nsec\x18\a \x01(\rH\x05R\tmtimeNsec\x88\x01\x01\x12\x15\n" +
+	"\x03uid\x18\b \x01(\rH\x06R\x03uid\x88\x01\x01\x12\x15\n" +
+	"\x03gid\x18\t \x01(\rH\aR\x03gid\x88\x01\x01B\a\n" +
+	"\x05_modeB\a\n" +
+	"\x05_sizeB\b\n" +
+	"\x06_atimeB\r\n" +
+	"\v_atime_nsecB\b\n" +
+	"\x06_mtimeB\r\n" +
+	"\v_mtime_nsecB\x06\n" +
+	"\x04_uidB\x06\n" +
+	"\x04_gid\"=\n" +
+	"\x0fSetattrResponse\x12*\n" +
 	"\x04node\x18\x01 \x01(\v2\x16.stream_mount_api.NodeR\x04node\"-\n" +
 	"\x12GetFileInfoRequest\x12\x17\n" +
-	"\anode_id\x18\x01 \x01(\x04R\x06nodeId\"Y\n" +
-	"\x13GetFileInfoResponse\x12\x17\n" +
-	"\x04size\x18\x01 \x01(\x04H\x00R\x04size\x88\x01\x01\x12\x17\n" +
-	"\x04mode\x18\x02 \x01(\rH\x01R\x04mode\x88\x01\x01B\a\n" +
-	"\x05_sizeB\a\n" +
-	"\x05_mode\".\n" +
+	"\anode_id\x18\x01 \x01(\x04R\x06nodeId\"\x96\x02\n" +
+	"\x13GetFileInfoResponse\x12\x12\n" +
+	"\x04size\x18\x01 \x01(\x04R\x04size\x12\x12\n" +
+	"\x04mode\x18\x02 \x01(\rR\x04mode\x12\x14\n" +
+	"\x05atime\x18\x03 \x01(\x04R\x05atime\x12\x1d\n" +
+	"\n" +
+	"atime_nsec\x18\x04 \x01(\rR\tatimeNsec\x12\x14\n" +
+	"\x05mtime\x18\x05 \x01(\x04R\x05mtime\x12\x1d\n" +
+	"\n" +
+	"mtime_nsec\x18\x06 \x01(\rR\tmtimeNsec\x12\x14\n" +
+	"\x05ctime\x18\a \x01(\x04R\x05ctime\x12\x1d\n" +
+	"\n" +
+	"ctime_nsec\x18\b \x01(\rR\tctimeNsec\x12\x10\n" +
+	"\x03uid\x18\t \x01(\rR\x03uid\x12\x10\n" +
+	"\x03gid\x18\n" +
+	" \x01(\rR\x03gid\x12\x14\n" +
+	"\x05nlink\x18\v \x01(\rR\x05nlink\".\n" +
 	"\x13GetStreamUrlRequest\x12\x17\n" +
 	"\anode_id\x18\x01 \x01(\x04R\x06nodeId\"5\n" +
 	"\x14GetStreamUrlResponse\x12\x15\n" +
@@ -1309,14 +1655,28 @@ const file_api_proto_rawDesc = "" +
 	"\x06offset\x18\x02 \x01(\x04R\x06offset\x12\x12\n" +
 	"\x04data\x18\x03 \x01(\fR\x04data\"8\n" +
 	"\x11WriteFileResponse\x12#\n" +
-	"\rbytes_written\x18\x01 \x01(\x04R\fbytesWritten\"^\n" +
+	"\rbytes_written\x18\x01 \x01(\x04R\fbytesWritten\"\xcb\x02\n" +
 	"\x04Node\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\x04R\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x12\n" +
 	"\x04mode\x18\x03 \x01(\rR\x04mode\x12\x1e\n" +
 	"\n" +
 	"streamable\x18\x04 \x01(\bR\n" +
-	"streamable2\xdc\a\n" +
+	"streamable\x12\x12\n" +
+	"\x04size\x18\x05 \x01(\x04R\x04size\x12\x14\n" +
+	"\x05atime\x18\x06 \x01(\x04R\x05atime\x12\x1d\n" +
+	"\n" +
+	"atime_nsec\x18\a \x01(\rR\tatimeNsec\x12\x14\n" +
+	"\x05mtime\x18\b \x01(\x04R\x05mtime\x12\x1d\n" +
+	"\n" +
+	"mtime_nsec\x18\t \x01(\rR\tmtimeNsec\x12\x14\n" +
+	"\x05ctime\x18\n" +
+	" \x01(\x04R\x05ctime\x12\x1d\n" +
+	"\n" +
+	"ctime_nsec\x18\v \x01(\rR\tctimeNsec\x12\x10\n" +
+	"\x03uid\x18\f \x01(\rR\x03uid\x12\x10\n" +
+	"\x03gid\x18\r \x01(\rR\x03gid\x12\x14\n" +
+	"\x05nlink\x18\x0e \x01(\rR\x05nlink2\xac\b\n" +
 	"\x11FileSystemService\x12E\n" +
 	"\x04Root\x12\x1d.stream_mount_api.RootRequest\x1a\x1e.stream_mount_api.RootResponse\x12W\n" +
 	"\n" +
@@ -1326,7 +1686,8 @@ const file_api_proto_rawDesc = "" +
 	"\x05Mkdir\x12\x1e.stream_mount_api.MkdirRequest\x1a\x1f.stream_mount_api.MkdirResponse\x12K\n" +
 	"\x06Remove\x12\x1f.stream_mount_api.RemoveRequest\x1a .stream_mount_api.RemoveResponse\x12K\n" +
 	"\x06Rename\x12\x1f.stream_mount_api.RenameRequest\x1a .stream_mount_api.RenameResponse\x12E\n" +
-	"\x04Link\x12\x1d.stream_mount_api.LinkRequest\x1a\x1e.stream_mount_api.LinkResponse\x12Q\n" +
+	"\x04Link\x12\x1d.stream_mount_api.LinkRequest\x1a\x1e.stream_mount_api.LinkResponse\x12N\n" +
+	"\aSetattr\x12 .stream_mount_api.SetattrRequest\x1a!.stream_mount_api.SetattrResponse\x12Q\n" +
 	"\bReadFile\x12!.stream_mount_api.ReadFileRequest\x1a\".stream_mount_api.ReadFileResponse\x12T\n" +
 	"\tWriteFile\x12\".stream_mount_api.WriteFileRequest\x1a#.stream_mount_api.WriteFileResponse\x12Z\n" +
 	"\vGetFileInfo\x12$.stream_mount_api.GetFileInfoRequest\x1a%.stream_mount_api.GetFileInfoResponse\x12]\n" +
@@ -1344,7 +1705,7 @@ func file_api_proto_rawDescGZIP() []byte {
 	return file_api_proto_rawDescData
 }
 
-var file_api_proto_msgTypes = make([]protoimpl.MessageInfo, 25)
+var file_api_proto_msgTypes = make([]protoimpl.MessageInfo, 27)
 var file_api_proto_goTypes = []any{
 	(*RootRequest)(nil),          // 0: stream_mount_api.RootRequest
 	(*RootResponse)(nil),         // 1: stream_mount_api.RootResponse
@@ -1362,52 +1723,58 @@ var file_api_proto_goTypes = []any{
 	(*RenameResponse)(nil),       // 13: stream_mount_api.RenameResponse
 	(*LinkRequest)(nil),          // 14: stream_mount_api.LinkRequest
 	(*LinkResponse)(nil),         // 15: stream_mount_api.LinkResponse
-	(*GetFileInfoRequest)(nil),   // 16: stream_mount_api.GetFileInfoRequest
-	(*GetFileInfoResponse)(nil),  // 17: stream_mount_api.GetFileInfoResponse
-	(*GetStreamUrlRequest)(nil),  // 18: stream_mount_api.GetStreamUrlRequest
-	(*GetStreamUrlResponse)(nil), // 19: stream_mount_api.GetStreamUrlResponse
-	(*ReadFileRequest)(nil),      // 20: stream_mount_api.ReadFileRequest
-	(*ReadFileResponse)(nil),     // 21: stream_mount_api.ReadFileResponse
-	(*WriteFileRequest)(nil),     // 22: stream_mount_api.WriteFileRequest
-	(*WriteFileResponse)(nil),    // 23: stream_mount_api.WriteFileResponse
-	(*Node)(nil),                 // 24: stream_mount_api.Node
+	(*SetattrRequest)(nil),       // 16: stream_mount_api.SetattrRequest
+	(*SetattrResponse)(nil),      // 17: stream_mount_api.SetattrResponse
+	(*GetFileInfoRequest)(nil),   // 18: stream_mount_api.GetFileInfoRequest
+	(*GetFileInfoResponse)(nil),  // 19: stream_mount_api.GetFileInfoResponse
+	(*GetStreamUrlRequest)(nil),  // 20: stream_mount_api.GetStreamUrlRequest
+	(*GetStreamUrlResponse)(nil), // 21: stream_mount_api.GetStreamUrlResponse
+	(*ReadFileRequest)(nil),      // 22: stream_mount_api.ReadFileRequest
+	(*ReadFileResponse)(nil),     // 23: stream_mount_api.ReadFileResponse
+	(*WriteFileRequest)(nil),     // 24: stream_mount_api.WriteFileRequest
+	(*WriteFileResponse)(nil),    // 25: stream_mount_api.WriteFileResponse
+	(*Node)(nil),                 // 26: stream_mount_api.Node
 }
 var file_api_proto_depIdxs = []int32{
-	24, // 0: stream_mount_api.RootResponse.root:type_name -> stream_mount_api.Node
-	24, // 1: stream_mount_api.ReadDirAllResponse.nodes:type_name -> stream_mount_api.Node
-	24, // 2: stream_mount_api.LookupResponse.node:type_name -> stream_mount_api.Node
-	24, // 3: stream_mount_api.MkdirResponse.node:type_name -> stream_mount_api.Node
-	24, // 4: stream_mount_api.RenameResponse.node:type_name -> stream_mount_api.Node
-	24, // 5: stream_mount_api.LinkResponse.node:type_name -> stream_mount_api.Node
-	0,  // 6: stream_mount_api.FileSystemService.Root:input_type -> stream_mount_api.RootRequest
-	2,  // 7: stream_mount_api.FileSystemService.ReadDirAll:input_type -> stream_mount_api.ReadDirAllRequest
-	4,  // 8: stream_mount_api.FileSystemService.Lookup:input_type -> stream_mount_api.LookupRequest
-	6,  // 9: stream_mount_api.FileSystemService.Create:input_type -> stream_mount_api.CreateRequest
-	8,  // 10: stream_mount_api.FileSystemService.Mkdir:input_type -> stream_mount_api.MkdirRequest
-	10, // 11: stream_mount_api.FileSystemService.Remove:input_type -> stream_mount_api.RemoveRequest
-	12, // 12: stream_mount_api.FileSystemService.Rename:input_type -> stream_mount_api.RenameRequest
-	14, // 13: stream_mount_api.FileSystemService.Link:input_type -> stream_mount_api.LinkRequest
-	20, // 14: stream_mount_api.FileSystemService.ReadFile:input_type -> stream_mount_api.ReadFileRequest
-	22, // 15: stream_mount_api.FileSystemService.WriteFile:input_type -> stream_mount_api.WriteFileRequest
-	16, // 16: stream_mount_api.FileSystemService.GetFileInfo:input_type -> stream_mount_api.GetFileInfoRequest
-	18, // 17: stream_mount_api.FileSystemService.GetStreamUrl:input_type -> stream_mount_api.GetStreamUrlRequest
-	1,  // 18: stream_mount_api.FileSystemService.Root:output_type -> stream_mount_api.RootResponse
-	3,  // 19: stream_mount_api.FileSystemService.ReadDirAll:output_type -> stream_mount_api.ReadDirAllResponse
-	5,  // 20: stream_mount_api.FileSystemService.Lookup:output_type -> stream_mount_api.LookupResponse
-	7,  // 21: stream_mount_api.FileSystemService.Create:output_type -> stream_mount_api.CreateResponse
-	9,  // 22: stream_mount_api.FileSystemService.Mkdir:output_type -> stream_mount_api.MkdirResponse
-	11, // 23: stream_mount_api.FileSystemService.Remove:output_type -> stream_mount_api.RemoveResponse
-	13, // 24: stream_mount_api.FileSystemService.Rename:output_type -> stream_mount_api.RenameResponse
-	15, // 25: stream_mount_api.FileSystemService.Link:output_type -> stream_mount_api.LinkResponse
-	21, // 26: stream_mount_api.FileSystemService.ReadFile:output_type -> stream_mount_api.ReadFileResponse
-	23, // 27: stream_mount_api.FileSystemService.WriteFile:output_type -> stream_mount_api.WriteFileResponse
-	17, // 28: stream_mount_api.FileSystemService.GetFileInfo:output_type -> stream_mount_api.GetFileInfoResponse
-	19, // 29: stream_mount_api.FileSystemService.GetStreamUrl:output_type -> stream_mount_api.GetStreamUrlResponse
-	18, // [18:30] is the sub-list for method output_type
-	6,  // [6:18] is the sub-list for method input_type
-	6,  // [6:6] is the sub-list for extension type_name
-	6,  // [6:6] is the sub-list for extension extendee
-	0,  // [0:6] is the sub-list for field type_name
+	26, // 0: stream_mount_api.RootResponse.root:type_name -> stream_mount_api.Node
+	26, // 1: stream_mount_api.ReadDirAllResponse.nodes:type_name -> stream_mount_api.Node
+	26, // 2: stream_mount_api.LookupResponse.node:type_name -> stream_mount_api.Node
+	26, // 3: stream_mount_api.CreateResponse.node:type_name -> stream_mount_api.Node
+	26, // 4: stream_mount_api.MkdirResponse.node:type_name -> stream_mount_api.Node
+	26, // 5: stream_mount_api.RenameResponse.node:type_name -> stream_mount_api.Node
+	26, // 6: stream_mount_api.LinkResponse.node:type_name -> stream_mount_api.Node
+	26, // 7: stream_mount_api.SetattrResponse.node:type_name -> stream_mount_api.Node
+	0,  // 8: stream_mount_api.FileSystemService.Root:input_type -> stream_mount_api.RootRequest
+	2,  // 9: stream_mount_api.FileSystemService.ReadDirAll:input_type -> stream_mount_api.ReadDirAllRequest
+	4,  // 10: stream_mount_api.FileSystemService.Lookup:input_type -> stream_mount_api.LookupRequest
+	6,  // 11: stream_mount_api.FileSystemService.Create:input_type -> stream_mount_api.CreateRequest
+	8,  // 12: stream_mount_api.FileSystemService.Mkdir:input_type -> stream_mount_api.MkdirRequest
+	10, // 13: stream_mount_api.FileSystemService.Remove:input_type -> stream_mount_api.RemoveRequest
+	12, // 14: stream_mount_api.FileSystemService.Rename:input_type -> stream_mount_api.RenameRequest
+	14, // 15: stream_mount_api.FileSystemService.Link:input_type -> stream_mount_api.LinkRequest
+	16, // 16: stream_mount_api.FileSystemService.Setattr:input_type -> stream_mount_api.SetattrRequest
+	22, // 17: stream_mount_api.FileSystemService.ReadFile:input_type -> stream_mount_api.ReadFileRequest
+	24, // 18: stream_mount_api.FileSystemService.WriteFile:input_type -> stream_mount_api.WriteFileRequest
+	18, // 19: stream_mount_api.FileSystemService.GetFileInfo:input_type -> stream_mount_api.GetFileInfoRequest
+	20, // 20: stream_mount_api.FileSystemService.GetStreamUrl:input_type -> stream_mount_api.GetStreamUrlRequest
+	1,  // 21: stream_mount_api.FileSystemService.Root:output_type -> stream_mount_api.RootResponse
+	3,  // 22: stream_mount_api.FileSystemService.ReadDirAll:output_type -> stream_mount_api.ReadDirAllResponse
+	5,  // 23: stream_mount_api.FileSystemService.Lookup:output_type -> stream_mount_api.LookupResponse
+	7,  // 24: stream_mount_api.FileSystemService.Create:output_type -> stream_mount_api.CreateResponse
+	9,  // 25: stream_mount_api.FileSystemService.Mkdir:output_type -> stream_mount_api.MkdirResponse
+	11, // 26: stream_mount_api.FileSystemService.Remove:output_type -> stream_mount_api.RemoveResponse
+	13, // 27: stream_mount_api.FileSystemService.Rename:output_type -> stream_mount_api.RenameResponse
+	15, // 28: stream_mount_api.FileSystemService.Link:output_type -> stream_mount_api.LinkResponse
+	17, // 29: stream_mount_api.FileSystemService.Setattr:output_type -> stream_mount_api.SetattrResponse
+	23, // 30: stream_mount_api.FileSystemService.ReadFile:output_type -> stream_mount_api.ReadFileResponse
+	25, // 31: stream_mount_api.FileSystemService.WriteFile:output_type -> stream_mount_api.WriteFileResponse
+	19, // 32: stream_mount_api.FileSystemService.GetFileInfo:output_type -> stream_mount_api.GetFileInfoResponse
+	21, // 33: stream_mount_api.FileSystemService.GetStreamUrl:output_type -> stream_mount_api.GetStreamUrlResponse
+	21, // [21:34] is the sub-list for method output_type
+	8,  // [8:21] is the sub-list for method input_type
+	8,  // [8:8] is the sub-list for extension type_name
+	8,  // [8:8] is the sub-list for extension extendee
+	0,  // [0:8] is the sub-list for field type_name
 }
 
 func init() { file_api_proto_init() }
@@ -1416,15 +1783,15 @@ func file_api_proto_init() {
 		return
 	}
 	file_api_proto_msgTypes[5].OneofWrappers = []any{}
-	file_api_proto_msgTypes[17].OneofWrappers = []any{}
-	file_api_proto_msgTypes[19].OneofWrappers = []any{}
+	file_api_proto_msgTypes[16].OneofWrappers = []any{}
+	file_api_proto_msgTypes[21].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_proto_rawDesc), len(file_api_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   25,
+			NumMessages:   27,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

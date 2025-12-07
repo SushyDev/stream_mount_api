@@ -27,6 +27,7 @@ const (
 	FileSystemService_Remove_FullMethodName       = "/stream_mount_api.FileSystemService/Remove"
 	FileSystemService_Rename_FullMethodName       = "/stream_mount_api.FileSystemService/Rename"
 	FileSystemService_Link_FullMethodName         = "/stream_mount_api.FileSystemService/Link"
+	FileSystemService_Setattr_FullMethodName      = "/stream_mount_api.FileSystemService/Setattr"
 	FileSystemService_ReadFile_FullMethodName     = "/stream_mount_api.FileSystemService/ReadFile"
 	FileSystemService_WriteFile_FullMethodName    = "/stream_mount_api.FileSystemService/WriteFile"
 	FileSystemService_GetFileInfo_FullMethodName  = "/stream_mount_api.FileSystemService/GetFileInfo"
@@ -45,6 +46,7 @@ type FileSystemServiceClient interface {
 	Remove(ctx context.Context, in *RemoveRequest, opts ...grpc.CallOption) (*RemoveResponse, error)
 	Rename(ctx context.Context, in *RenameRequest, opts ...grpc.CallOption) (*RenameResponse, error)
 	Link(ctx context.Context, in *LinkRequest, opts ...grpc.CallOption) (*LinkResponse, error)
+	Setattr(ctx context.Context, in *SetattrRequest, opts ...grpc.CallOption) (*SetattrResponse, error)
 	ReadFile(ctx context.Context, in *ReadFileRequest, opts ...grpc.CallOption) (*ReadFileResponse, error)
 	WriteFile(ctx context.Context, in *WriteFileRequest, opts ...grpc.CallOption) (*WriteFileResponse, error)
 	GetFileInfo(ctx context.Context, in *GetFileInfoRequest, opts ...grpc.CallOption) (*GetFileInfoResponse, error)
@@ -139,6 +141,16 @@ func (c *fileSystemServiceClient) Link(ctx context.Context, in *LinkRequest, opt
 	return out, nil
 }
 
+func (c *fileSystemServiceClient) Setattr(ctx context.Context, in *SetattrRequest, opts ...grpc.CallOption) (*SetattrResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetattrResponse)
+	err := c.cc.Invoke(ctx, FileSystemService_Setattr_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *fileSystemServiceClient) ReadFile(ctx context.Context, in *ReadFileRequest, opts ...grpc.CallOption) (*ReadFileResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ReadFileResponse)
@@ -191,6 +203,7 @@ type FileSystemServiceServer interface {
 	Remove(context.Context, *RemoveRequest) (*RemoveResponse, error)
 	Rename(context.Context, *RenameRequest) (*RenameResponse, error)
 	Link(context.Context, *LinkRequest) (*LinkResponse, error)
+	Setattr(context.Context, *SetattrRequest) (*SetattrResponse, error)
 	ReadFile(context.Context, *ReadFileRequest) (*ReadFileResponse, error)
 	WriteFile(context.Context, *WriteFileRequest) (*WriteFileResponse, error)
 	GetFileInfo(context.Context, *GetFileInfoRequest) (*GetFileInfoResponse, error)
@@ -228,6 +241,9 @@ func (UnimplementedFileSystemServiceServer) Rename(context.Context, *RenameReque
 }
 func (UnimplementedFileSystemServiceServer) Link(context.Context, *LinkRequest) (*LinkResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Link not implemented")
+}
+func (UnimplementedFileSystemServiceServer) Setattr(context.Context, *SetattrRequest) (*SetattrResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Setattr not implemented")
 }
 func (UnimplementedFileSystemServiceServer) ReadFile(context.Context, *ReadFileRequest) (*ReadFileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ReadFile not implemented")
@@ -406,6 +422,24 @@ func _FileSystemService_Link_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _FileSystemService_Setattr_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetattrRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileSystemServiceServer).Setattr(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: FileSystemService_Setattr_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileSystemServiceServer).Setattr(ctx, req.(*SetattrRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _FileSystemService_ReadFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ReadFileRequest)
 	if err := dec(in); err != nil {
@@ -516,6 +550,10 @@ var FileSystemService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Link",
 			Handler:    _FileSystemService_Link_Handler,
+		},
+		{
+			MethodName: "Setattr",
+			Handler:    _FileSystemService_Setattr_Handler,
 		},
 		{
 			MethodName: "ReadFile",
