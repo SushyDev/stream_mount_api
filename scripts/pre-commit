@@ -41,8 +41,7 @@ fi
 
 # Add generated files to the commit
 echo -e "${YELLOW}Adding generated files to commit...${NC}"
-git add gen/go/stream_mount_api/*.go 2>/dev/null || true
-git add gen/elixir/lib/generated/*.pb.ex 2>/dev/null || true
+git add gen/go gen/elixir
 
 echo -e "${GREEN}✓ Code generation complete and added to commit${NC}"
 exit 0
