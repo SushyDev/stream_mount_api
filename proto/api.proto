@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package stream_mount_api;
 
-option go_package = "../stream_mount_api";
+option go_package = "github.com/sushydev/stream_mount_api/gen/go/stream_mount_api";
 
 service FileSystemService {
 	rpc Root(RootRequest) returns (RootResponse);
@@ -14,8 +14,6 @@ service FileSystemService {
 	rpc Rename(RenameRequest) returns (RenameResponse);
 	rpc Link(LinkRequest) returns (LinkResponse);
 
-	rpc ReadLink(ReadLinkRequest) returns (ReadLinkResponse);
-
 	rpc ReadFile(ReadFileRequest) returns (ReadFileResponse);
 	rpc WriteFile(WriteFileRequest) returns (WriteFileResponse);
 
@@ -26,7 +24,7 @@ service FileSystemService {
 message RootRequest {}
 
 message RootResponse {
-	Node root = 1;
+	optional Node root = 1;
 }
 
 message ReadDirAllRequest {
@@ -43,7 +41,7 @@ message LookupRequest {
 }
 
 message LookupResponse {
-	Node node = 1;
+	optional Node node = 1;
 }
 message CreateRequest {
 	uint64 parent_node_id = 1;
@@ -95,8 +93,8 @@ message GetFileInfoRequest {
 }
 
 message GetFileInfoResponse {
-	uint64 size = 1;
-	uint32 mode = 2;
+	optional uint64 size = 1;
+	optional uint32 mode = 2;
 }
 
 message GetStreamUrlRequest {
@@ -104,7 +102,7 @@ message GetStreamUrlRequest {
 }
 
 message GetStreamUrlResponse {
-	string url = 1;
+	optional string url = 1;
 }
 
 message ReadFileRequest {
@@ -125,14 +123,6 @@ message WriteFileRequest {
 
 message WriteFileResponse {
 	uint64 bytes_written = 1;
-}
-
-message ReadLinkRequest {
-	uint64 node_id = 1;
-}
-
-message ReadLinkResponse {
-	string path = 1;
 }
 
 message Node {

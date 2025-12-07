@@ -1,0 +1,50 @@
+# Direnv
+/.direnv
+
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Go workspace file
+go.work
+
+# Dependency directories
+vendor/
+
+# Elixir
+/_build/
+/deps/
+/doc/
+/.fetch
+erl_crash.dump
+*.beam
+*.ez
+.elixir_ls/
+
+# Mix
+/gen/elixir/.mix/
+/gen/elixir/mix.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Don't ignore generated code - we want to commit it
+!gen/go/
+!gen/elixir/lib/generated/
