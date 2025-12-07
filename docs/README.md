@@ -75,7 +75,7 @@ resp, _ := client.Root(context.Background(), &pb.RootRequest{})
 
 Get the package:
 ```bash
-go get github.com/sushydev/stream_mount_api
+got get github.com/sushydev/stream_mount_api/gen/go
 ```
 
 ## Using as an Elixir Package
