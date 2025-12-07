@@ -24,7 +24,7 @@ service FileSystemService {
 message RootRequest {}
 
 message RootResponse {
-	Node root = 1;
+	optional Node root = 1;
 }
 
 message ReadDirAllRequest {
