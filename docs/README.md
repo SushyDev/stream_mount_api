@@ -19,23 +19,20 @@ This repository contains:
 │   └── api.proto          # Main API definition
 ├── gen/                   # Generated code (committed to repo)
 │   ├── go/                # Generated Go code
-│   │   └── stream_mount_api/  # Import from here in Go projects
-│   │       ├── api.pb.go
-│   │       └── api_grpc.pb.go
-│   └── elixir/            # Elixir Mix project
-│       ├── mix.exs        # Elixir package definition
-│       └── lib/
-│           ├── stream_mount_api.ex
-│           └── generated/ # Generated .pb.ex files
-├── flake.nix              # Nix development environment
-├── go.mod                 # Go module file (enables go get)
-├── Makefile              # Build commands
-└── scripts/
-    ├── pre-commit        # Git pre-commit hook
-    └── generate.sh       # Generation script
+│   └── elixir/            # Generated Elixir code
+├── nix/                   # Nix development environment
+├── docs/                  # Documentation
+│   ├── README.md          # Main documentation
+│   └── QUICKSTART.md      # Quick start guide
+├── scripts/
+│   ├── pre-commit         # Git pre-commit hook
+│   └── generate.sh        # Generation script
+├── Makefile               # Build commands
+├── .envrc                 # direnv configuration
+└── .gitignore             # Git ignore patterns
 ```
 
-**For Go users**: Import `github.com/sushydev/stream_mount_api/gen/go/stream_mount_api`  
+**For Go users**: Import `github.com/sushydev/stream_mount_api/gen/go`  
 **For Elixir users**: Add as dependency pointing to `gen/elixir` subdirectory
 
 ## Quick Start
@@ -69,7 +66,7 @@ This auto-generates code when you commit proto file changes.
 ## Using as a Go Package
 
 ```go
-import pb "github.com/sushydev/stream_mount_api/gen/go/stream_mount_api"
+import pb "github.com/sushydev/stream_mount_api/gen/go"
 
 // Use the client
 client := pb.NewFileSystemServiceClient(conn)
