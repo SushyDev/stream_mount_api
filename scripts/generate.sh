@@ -1,14 +1,13 @@
 #!/usr/bin/env bash
-# Generate script for Stream Mount API
 
 set -e
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$SCRIPT_DIR/.."
 
-PROTO_DIR="proto"
-GO_OUT_DIR="gen/go"
-ELIXIR_OUT_DIR="gen/elixir/lib/generated"
+readonly PROTO_DIR="proto"
+readonly GO_OUT_DIR="gen/go"
+readonly ELIXIR_OUT_DIR="gen/elixir/lib/generated"
 
 echo "Stream Mount API - Code Generator"
 echo ""
@@ -21,12 +20,12 @@ if ! command -v protoc &> /dev/null; then
 fi
 
 # Generate Go code
-echo "Generating Go code..."
-mkdir -p "$GO_OUT_DIR"
-
 if ! command -v protoc-gen-go &> /dev/null || ! command -v protoc-gen-go-grpc &> /dev/null; then
     echo "WARNING: Go protoc plugins not found. Skipping Go generation."
 else
+    echo "Generating Go code..."
+    mkdir -p "$GO_OUT_DIR"
+
     protoc \
         --go_out="$GO_OUT_DIR" \
         --go_opt=paths=source_relative \
@@ -38,13 +37,13 @@ else
 fi
 
 # Generate Elixir code
-echo ""
-echo "Generating Elixir code..."
-mkdir -p "$ELIXIR_OUT_DIR"
-
 if ! command -v protoc-gen-elixir &> /dev/null; then
     echo "WARNING: Elixir protoc plugin not found. Skipping Elixir generation."
 else
+    echo ""
+    echo "Generating Elixir code..."
+    mkdir -p "$ELIXIR_OUT_DIR"
+
     protoc \
         --elixir_out=plugins=grpc:"$ELIXIR_OUT_DIR" \
         --proto_path="$PROTO_DIR" \
