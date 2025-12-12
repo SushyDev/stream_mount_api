@@ -2,12 +2,30 @@
 
 set -e
 
-readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROJECT_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || true)"
+readonly PROJECT_ROOT
+
+if [[ -z "$PROJECT_ROOT" ]] && [[ ! -d "$PROJECT_ROOT" ]]; then
+	echo "Error: Could not find git root. Are you inside a git repository?" >&2
+	exit 1
+fi
+
+SCRIPT_DIR="$PROJECT_ROOT/scripts"
+readonly SCRIPT_DIR
+
+if [[ -z "$SCRIPT_DIR" ]] && [[ ! -d "$SCRIPT_DIR" ]]; then
+	echo "Error: Script directory not found: $SCRIPT_DIR" >&2
+	exit 1
+fi
+
 cd "$SCRIPT_DIR/.."
 
-readonly PROTO_DIR="proto"
-readonly GO_OUT_DIR="gen/go"
-readonly ELIXIR_OUT_DIR="gen/elixir/lib/generated"
+PROTO_DIR="$PROJECT_ROOT/proto"
+readonly PROTO_DIR
+GO_OUT_DIR="$PROJECT_ROOT/gen/go"
+readonly GO_OUT_DIR
+ELIXIR_OUT_DIR="$PROJECT_ROOT/gen/elixir/lib/generated"
+readonly ELIXIR_OUT_DIR
 
 echo "Stream Mount API - Code Generator"
 echo ""
